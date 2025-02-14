@@ -33,6 +33,10 @@ def parse_args():
         action="store_true",
         help="Delete events automatically added by the script before adding new events",
     )
+
+    parser.add_argument('-c', "--cal", dest='cal', default="primary",
+        help="Name of the calendar in which the events will be added to, you will have to manually create a calendar on the google calendar app/website",)
+
     args = parser.parse_args()
     return args
 
@@ -90,8 +94,10 @@ def main():
     print("3. Exit")
     choice = int(input("Enter your choice: "))
 
+    print(args.cal)
+
     if choice == 1:
-        create_calendar(courses)
+        create_calendar(courses,args.cal)
     elif choice == 2:
         generate_ics(courses, output_filename)
     else:
