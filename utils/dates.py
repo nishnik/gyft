@@ -31,8 +31,12 @@ def get_holidates() -> (list[datetime], list[str, datetime]):
     scrapes holiday list from IITKGP website
     returns: list of holidays as occasions and datetime objects
     """
+    headers = {
+        "timeout": "20",
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/51.0.2704.79 Chrome/51.0.2704.79 Safari/537.36",
+    }
     url = "https://www.iitkgp.ac.in/holidays"
-    result = requests.get(url).text
+    result = requests.get(url=url, headers=headers).text
     doc = bs(result, "html.parser")
     tbody = doc.tbody
     trs = tbody.contents
